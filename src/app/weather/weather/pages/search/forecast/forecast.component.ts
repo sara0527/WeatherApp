@@ -31,17 +31,17 @@ export class ForecastComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(isMetric => {
         this.isMetric = isMetric;
-        this.loadWeatherData(isMetric);
+        this.loadForecastData(isMetric);
       });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['locationData'] && this.locationData) {
-      this.loadWeatherData();
+      this.loadForecastData();
     }
   }
 
-  loadWeatherData(isMetric: boolean = true) {
+  loadForecastData(isMetric: boolean = true) {
     this.weatherService.getForecast(this.locationData.Key, isMetric)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -56,7 +56,7 @@ export class ForecastComponent implements OnInit, OnDestroy {
 
   handleError(error: any) {
     console.error('An error occurred in search', error);
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load weather data' });
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load forecast data' });
   }
 
   get dailyForecasts(): DailyForecast[] {
