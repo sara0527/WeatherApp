@@ -15,7 +15,6 @@ export class CurrentWeatherComponent implements OnInit, OnChanges, OnDestroy {
   @Input() locationData: Location;
   currentWeather: CurrentWeather;
   isMetric: boolean = true;
-  private temperatureUnitSubscription: Subscription;
   private destroy$ = new Subject<void>();
 
 
@@ -25,7 +24,7 @@ export class CurrentWeatherComponent implements OnInit, OnChanges, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.temperatureUnitSubscription = this.weatherService.temperatureUnitChanged
+    this.weatherService.temperatureUnitChanged
       .pipe(takeUntil(this.destroy$))
       .subscribe(isMetric => {
         this.isMetric = isMetric;
@@ -40,14 +39,15 @@ export class CurrentWeatherComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   loadWeatherData() {
-    this.weatherService.getCurrentWeather(this.locationData.Key).subscribe({
-      next: (currentWeather: CurrentWeather) => {
-        this.currentWeather = { ...currentWeather[0] };
-        this.cdr.markForCheck();
-      },
-      error: (error) =>
-        this.handleError(error)
-    })
+    this.weatherService.getCurrentWeather(this.locationData.Key)
+      .pipe(takeUntil(this.destroy$)).subscribe({
+        next: (currentWeather: CurrentWeather) => {
+          this.currentWeather = { ...currentWeather[0] };
+          this.cdr.markForCheck();
+        },
+        error: (error) =>
+          this.handleError(error)
+      })
 
   }
 
@@ -77,9 +77,6 @@ export class CurrentWeatherComponent implements OnInit, OnChanges, OnDestroy {
 
 
   ngOnDestroy(): void {
-    if (this.temperatureUnitSubscription) {
-      this.temperatureUnitSubscription.unsubscribe();
-    }
     this.destroy$.next();
     this.destroy$.complete();
   }

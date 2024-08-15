@@ -42,14 +42,16 @@ export class ForecastComponent implements OnInit, OnDestroy {
   }
 
   loadWeatherData(isMetric: boolean = true) {
-    this.weatherService.getForecast(this.locationData.Key, isMetric).subscribe({
-      next: (forecastItems: Forecast) => {
-        this.forecast = forecastItems;
-        this.cdr.markForCheck();
-      },
-      error: (error) =>
-        this.handleError(error)
-    });
+    this.weatherService.getForecast(this.locationData.Key, isMetric)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (forecastItems: Forecast) => {
+          this.forecast = forecastItems;
+          this.cdr.markForCheck();
+        },
+        error: (error) =>
+          this.handleError(error)
+      });
   }
 
   handleError(error: any) {
