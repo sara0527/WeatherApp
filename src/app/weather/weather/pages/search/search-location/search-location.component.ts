@@ -85,6 +85,7 @@ export class SearchLocationComponent implements OnInit, OnDestroy {
     this.locationSelected.emit(location);
   }
 
+
   isFavorite(city: Location): boolean {
     return this.favoritesService.getFavorites().some((f: Location) => f.Key === city.Key);
   }

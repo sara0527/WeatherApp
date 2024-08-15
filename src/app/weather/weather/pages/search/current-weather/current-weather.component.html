@@ -1,9 +1,7 @@
-<p-card *ngIf="weather" header="Current Weather" [styleClass]="'current-weather-card'">
+<p-card *ngIf="currentWeather" header="Current Weather" [styleClass]="'current-weather-card'">
     <div class="weather-container">
-        <img [src]="'https://developer.accuweather.com/sites/default/files/' 
-        + (weather.WeatherIcon < 10 ? '0' + weather.WeatherIcon : weather.WeatherIcon) + '-s.png'"
-            [alt]="weather.WeatherText">
+        <img [src]="getWeatherIconUrl()" [alt]="currentWeather.WeatherText">
         <h3>{{ getTemperature() }}° {{ getUnit()}}</h3>
-        <p>{{ weather.WeatherText}}</p>
+        <p>{{ currentWeather.WeatherText}}</p>
     </div>
 </p-card>

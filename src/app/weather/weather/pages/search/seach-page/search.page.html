@@ -1,13 +1,13 @@
 <div class="search-container">
   <app-search-location (locationSelected)="onLocationSelected($event)"></app-search-location>
   <ng-container *ngIf="selectedLocation">
-    <div  class="location-header">
+    <div class="location-header">
       <h2>{{ selectedLocation.LocalizedName }}, {{ selectedLocation.Country.LocalizedName }}</h2>
       <button pButton pRipple type="button" (click)="toggleFavorite(selectedLocation)"
         [icon]="isFavorite(selectedLocation) ? 'pi pi-star-fill' : 'pi pi-star'"
         class="p-button-rounded p-button-text"></button>
     </div>
-    <app-current-weather *ngIf="currentWeather" [weather]="currentWeather"></app-current-weather>
-    <app-forecast *ngIf="forecast" [forecast]="forecast"></app-forecast>
+    <app-current-weather [locationData]="selectedLocation"></app-current-weather>
+    <app-forecast [locationData]="selectedLocation"></app-forecast>
   </ng-container>
 </div>

@@ -15,12 +15,12 @@ export class WeatherService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getForecast(locationKey: string): Observable<Forecast> {
-    const isMetric = this.isMetric ? 'true' : 'false';
+  getForecast(locationKey: string, isMetric: boolean = true): Observable<Forecast> {
+    const isMetricParam = isMetric ? 'true' : 'false';
     let params: HttpParams = new HttpParams();
     params = params.append('apikey', environment.apiKey);
-    params = params.append('metric', isMetric);
-    
+    params = params.append('metric', isMetricParam);
+
     return this.httpClient.get<Forecast>(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}`, { params });
   }
 
