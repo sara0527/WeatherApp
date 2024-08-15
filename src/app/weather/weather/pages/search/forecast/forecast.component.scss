@@ -1,0 +1,11 @@
+.forecast-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .forecast-day {
+    text-align: center;
+    width: 18%;
+    margin-bottom: 1em;
+  }
+}

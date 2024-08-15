@@ -1,0 +1,32 @@
+::ng-deep .p-autocomplete .p-inputtext {
+    width: 350px !important;
+}
+
+.city-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px;
+}
+
+.city-item span {
+    flex: 1;
+}
+
+.city-item button {
+    margin-left: 10px;
+}
+
+.icon-star {
+    float: right;
+}
+
+.invalid-input {
+    .p-autocomplete-input {
+        border-color: red !important;
+    }
+}
+.error-message {
+    color: red;
+    font-size: 0.8em;
+}

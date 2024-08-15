@@ -1,0 +1,13 @@
+<p-card  *ngIf="forecast" header="5-Day Forecast" [style]="{'width': '100%'}">
+  <div class="forecast-container">
+    <div *ngFor="let day of dailyForecasts" class="forecast-day">
+      <h4>{{ day.Date | date:'EEE, MMM d' }}</h4>
+      <img [src]="'https://developer.accuweather.com/sites/default/files/' + 
+             (day.Day.Icon < 10 ? '0' + day.Day.Icon : day.Day.Icon) + 
+             '-s.png'" [alt]="day.Day.IconPhrase">
+      <h4>
+        {{ day.Temperature.Maximum.Value}}° Hi / {{ day.Temperature.Minimum.Value}}° Lo
+      </h4>
+    </div>
+  </div>
+</p-card>

@@ -1,0 +1,16 @@
+<div>
+  <p-autoComplete [(ngModel)]="selectedCity" [suggestions]="cities" (completeMethod)="search($event)"
+    [class.invalid-input]="!isValidInput" (onSelect)="selectCity($event)" field="LocalizedName"
+    placeholder="Search for a city">
+    <ng-template let-city pTemplate="item">
+      <div class="city-item">
+        <span>{{ city.LocalizedName }}</span>
+        <button pButton pRipple type="button" [icon]="isFavorite(city) ? 'pi pi-star-fill' : 'pi pi-star'"
+          class="p-button-rounded p-button-text  icon-star"></button>
+      </div>
+    </ng-template>
+  </p-autoComplete>
+  <div>
+    <small class="error-message" *ngIf="!isValidInput">{{ errorMessage }}</small>
+  </div>
+</div>

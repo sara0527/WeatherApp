@@ -1,0 +1,25 @@
+<div id="app-wrapper">
+  <div id="loader"> <p-progressBar *ngIf="displayLoading" mode="indeterminate"></p-progressBar></div>
+
+  <div id="sidenav-container">
+    <h1>WeatherMe</h1>
+
+    <div class="link-wrapper">
+      <i class="pi pi-search"></i>
+      <p routerLink="/search">Search</p>
+    </div>
+    <div>
+      <div id="slide-toggle">
+        <p-inputSwitch [(ngModel)]="isMetric" (onChange)="changeTemperatureUnit()"> </p-inputSwitch>
+        <label>
+          Temperature in Fahrenheit
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-wrapper">
+    <p-toast></p-toast>
+    <router-outlet></router-outlet>
+  </div>
+</div>
